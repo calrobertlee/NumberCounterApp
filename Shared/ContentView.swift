@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var number = 0
-    @State private var secretNum: Int = 0
+    @State private var storedNum: Int = 0
     @State private var additionActive: Bool = false
     @State private var subtractionActive: Bool = false
     
@@ -17,15 +17,15 @@ struct ContentView: View {
         
         VStack{
             Spacer()
-            Text("\(secretNum)")
+            Text("\(storedNum)")
                 .font(.system(size: 34, design: .rounded))
                 .foregroundColor(.gray)
             Text("\(number)")
-                .font(.system(size: 70, design: .rounded))
+                .font(.system(size: 80, design: .rounded))
             // Buttons
             HStack {
                 Button(action: {
-                    secretNum = number
+                    storedNum = number
                     number = 0
                     subtractionActive = false
                     additionActive = true
@@ -33,7 +33,7 @@ struct ContentView: View {
                     Text("Plus")
                 })
                 Button(action: {
-                    secretNum = number
+                    storedNum = number
                     number = 0
                     additionActive = false
                     subtractionActive = true
@@ -42,10 +42,10 @@ struct ContentView: View {
                 })
                 Button(action: {
                     if additionActive {
-                        number = number + secretNum
+                        number = number + storedNum
                     }
                     if subtractionActive {
-                        number = secretNum - number
+                        number = storedNum - number
                     }
                 }, label: {
                     Text("Equals")
@@ -61,7 +61,7 @@ struct ContentView: View {
                 })
                 Button(action: {
                     number = 0
-                    secretNum = 0
+                    storedNum = 0
                     subtractionActive = false
                     additionActive = false
                 }, label: {
@@ -95,12 +95,6 @@ struct ContentView: View {
                     }, label: {
                         Text("3").font(.title)
                     })
-                } else {
-                    Text("0").font(.title).foregroundColor(.gray)
-                    Text("1").font(.title).foregroundColor(.gray)
-                    Text("2").font(.title).foregroundColor(.gray)
-                    Text("3").font(.title).foregroundColor(.gray)
-
                 }
             }
         }
