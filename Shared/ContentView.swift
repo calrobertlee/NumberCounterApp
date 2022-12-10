@@ -14,8 +14,8 @@ struct ContentView: View {
         
         VStack{
             Spacer()
-            Text("\(number)")
-                .font(.system(size: 70))
+            Text("\(number)").font(.system(size: 70))
+            // Buttons
             HStack {
                 Button(action: {
                     number -= 1
@@ -39,6 +39,23 @@ struct ContentView: View {
                 })
             }
             Spacer()
+            HStack {
+                Button(action: {
+                    number = 1
+                }, label: {
+                    Text("1")
+                })
+                Button(action: {
+                    number = number * 10 + 2
+                }, label: {
+                    Text("2")
+                })
+                Button(action: {
+                    number = number * 10 + 3
+                }, label: {
+                    Text("3")
+                })
+            }
         }
     }
 }
