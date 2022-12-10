@@ -8,99 +8,69 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var number = 0
-    @State private var storedNum: Int = 0
-    @State private var additionActive: Bool = false
-    @State private var subtractionActive: Bool = false
+    @State var entry: Int = 0
+    @State var operand: Int = 0
+    @State var secondOperand: Int = 0
+    @State var store: Bool = true
     
     var body: some View {
-        
-        VStack{
-            Spacer()
-            Text("\(storedNum)")
-                .font(.system(size: 34, design: .rounded))
-                .foregroundColor(.gray)
-            Text("\(number)")
-                .font(.system(size: 80, design: .rounded))
-            // Buttons
-            HStack {
+        VStack {
+            Text("\(secondOperand)").font(.largeTitle).foregroundColor(.black)
+            Text("\(operand)").font(.largeTitle).foregroundColor(.red)
+            Text("\(entry)").font(.largeTitle).foregroundColor(.blue).padding()
+            
+            VStack {
                 Button(action: {
-                    storedNum = number
-                    number = 0
-                    subtractionActive = false
-                    additionActive = true
+                    entry = 10
                 }, label: {
-                    Text("Plus")
+                    Text("input 10").font(.title3)
                 })
                 Button(action: {
-                    storedNum = number
-                    number = 0
-                    additionActive = false
-                    subtractionActive = true
+                    entry = 2
                 }, label: {
-                    Text("Minus")
+                    Text("input 2").font(.title3)
                 })
                 Button(action: {
-                    if additionActive {
-                        (storedNum, number) = (number,storedNum)
-                        number = number + storedNum
-                    }
-                    if subtractionActive {
-                        number = storedNum - number
+                    operand = entry
+                }, label: {
+                    Text("Addition").font(.title3)
+                })
+                Button(action: {
+                    if store {
+                        secondOperand = entry
+                        entry = secondOperand + operand
+                        store = false
+                    } else {
+                        entry = entry + secondOperand
                     }
                 }, label: {
-                    Text("Equals")
-                })
-            }
-            HStack {
-                Button(action: {
-                    number = 0
-                    subtractionActive = false
-                    additionActive = false
-                }, label: {
-                    Text("Clear")
+                    Text("Calculate").font(.title3)
                 })
                 Button(action: {
-                    number = 0
-                    storedNum = 0
-                    subtractionActive = false
-                    additionActive = false
+                    (entry, operand, secondOperand) = (0,0,0)
+                    store = true
                 }, label: {
-                    Text("Clear All")
+                    Text("Reset").font(.title3)
                 })
-            }.padding(.vertical, 8.0)
-            Spacer()
-            HStack {
-                if number < 999999 {
-                    // Button 0
-                    Button(action: {
-                        number = number * 10
-                    }, label: {
-                        Text("0").font(.title)
-                    })
-                    // Button 1
-                    Button(action: {
-                        number = number * 10 + 1
-                    }, label: {
-                        Text("1").font(.title)
-                    })
-                    // Button 2
-                    Button(action: {
-                        number = number * 10 + 2
-                    }, label: {
-                        Text("2").font(.title)
-                    })
-                    // Button 3
-                    Button(action: {
-                        number = number * 10 + 3
-                    }, label: {
-                        Text("3").font(.title)
-                    })
-                }
-            }
+            }.padding()
         }
     }
 }
+
+
+
+// Entry number
+// Operand number
+// Solution
+
+
+
+
+
+
+
+
+
 
 
 
