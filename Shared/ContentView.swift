@@ -42,6 +42,7 @@ struct ContentView: View {
                 })
                 Button(action: {
                     if additionActive {
+                        (storedNum, number) = (number,storedNum)
                         number = number + storedNum
                     }
                     if subtractionActive {
