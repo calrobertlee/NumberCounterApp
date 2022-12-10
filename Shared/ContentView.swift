@@ -10,37 +10,64 @@ import SwiftUI
 struct ContentView: View {
     @State private var number = 0
     @State private var secretNum: Int = 0
+    @State private var additionActive: Bool = false
+    @State private var subtractionActive: Bool = false
     
     var body: some View {
         
         VStack{
             Spacer()
-            Text("\(secretNum)").font(.system(size: 34))
-            Text("\(number)").font(.system(size: 70))
+            Text("\(secretNum)")
+                .font(.system(size: 34, design: .rounded))
+                .foregroundColor(.gray)
+            Text("\(number)")
+                .font(.system(size: 70, design: .rounded))
             // Buttons
             HStack {
                 Button(action: {
                     secretNum = number
                     number = 0
+                    subtractionActive = false
+                    additionActive = true
                 }, label: {
-                    Text("Add")
+                    Text("Plus")
                 })
                 Button(action: {
-                    number = number + secretNum
+                    secretNum = number
+                    number = 0
+                    additionActive = false
+                    subtractionActive = true
+                }, label: {
+                    Text("Minus")
+                })
+                Button(action: {
+                    if additionActive {
+                        number = number + secretNum
+                    }
+                    if subtractionActive {
+                        number = secretNum - number
+                    }
                 }, label: {
                     Text("Equals")
                 })
-                Button(action: {
-                    number = number * number
-                }, label: {
-                    Text("Square")
-                })
+            }
+            HStack {
                 Button(action: {
                     number = 0
+                    subtractionActive = false
+                    additionActive = false
                 }, label: {
                     Text("Clear")
                 })
-            }
+                Button(action: {
+                    number = 0
+                    secretNum = 0
+                    subtractionActive = false
+                    additionActive = false
+                }, label: {
+                    Text("Clear All")
+                })
+            }.padding(.vertical, 8.0)
             Spacer()
             HStack {
                 if number < 999999 {
