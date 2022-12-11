@@ -13,8 +13,19 @@ struct ContentView: View {
     @State var secondOperand: Int = 0
     @State var store: Bool = true
     
+    // Resuable struct, planned for input buttons.
+    struct button: View {
+        var label: String
+        
+        var body: some View {
+            Text("\(label)").font(.largeTitle).foregroundColor(.black)
+        }
+    }
+    
     var body: some View {
+        
         VStack {
+            button(label: "TEST")
             Text("\(secondOperand)").font(.largeTitle).foregroundColor(.black)
             Text("\(operand)").font(.largeTitle).foregroundColor(.red)
             Text("\(entry)").font(.largeTitle).foregroundColor(.blue).padding()
@@ -34,7 +45,7 @@ struct ContentView: View {
                     operand = entry
                 }, label: {
                     Text("Addition").font(.title3)
-                })
+                }) // Add active bold state later
                 Button(action: {
                     if store {
                         secondOperand = entry
