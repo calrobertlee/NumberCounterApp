@@ -14,7 +14,7 @@ struct ContentView: View {
     @State var store: Bool = true
     @State var additionActive: Bool = false
     @State var subtractionActive: Bool = false
-
+    @State var multiplyActive: Bool = false
     
     var body: some View {
         
@@ -28,7 +28,7 @@ struct ContentView: View {
              
              */
             Text("\(entry)")
-                .font(.system(size: 60))
+                .font(.system(size: 60, design: .rounded))
                 .foregroundColor(.black)
                 .padding()
             
@@ -65,18 +65,30 @@ struct ContentView: View {
                     entry = 0 // NOTE: update feature later.
                     additionActive = true
                     subtractionActive = false
+                    multiplyActive = false
                     store = true
                 }, label: {
-                    Text("Addition").font(.title3)
+                    Text("Add").font(.title3)
                 }).padding(.vertical, 2.0)
                 Button(action: {
                     operand = entry
                     entry = 0 // NOTE: update feature later.
                     subtractionActive = true
                     additionActive = false
+                    multiplyActive = false
                     store = true
                 }, label: {
-                    Text("Subtraction").font(.title3)
+                    Text("Subtract").font(.title3)
+                }).padding(.vertical, 2.0)
+                Button(action: {
+                    operand = entry
+                    entry = 0 // NOTE: update feature later.
+                    multiplyActive = true
+                    subtractionActive = false
+                    additionActive = false
+                    store = true
+                }, label: {
+                    Text("Multiply").font(.title3)
                 }).padding(.vertical, 2.0)
                 
                 // Calculate button.
@@ -93,6 +105,11 @@ struct ContentView: View {
                             entry = operand - secondOperand
                             store = false
                         }
+                        if multiplyActive {
+                            secondOperand = entry
+                            entry = operand * secondOperand
+                            store = false
+                        }
                     // Allows for repeated calculation of current amount.
                     } else {
                         if additionActive {
@@ -100,6 +117,9 @@ struct ContentView: View {
                         }
                         if subtractionActive {
                             entry = entry - secondOperand
+                        }
+                        if multiplyActive {
+                            entry = entry * secondOperand
                         }
                     }
                 }, label: {
