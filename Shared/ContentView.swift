@@ -12,6 +12,8 @@ struct ContentView: View {
     @State var operand: Int = 0
     @State var secondOperand: Int = 0
     @State var store: Bool = true
+    @State var additionActive: Bool = false
+    @State var subtractionActive: Bool = false
 
     
     var body: some View {
@@ -56,25 +58,52 @@ struct ContentView: View {
                 Button(action: {
                     operand = entry
                     entry = 0 // NOTE: update feature later.
+                    additionActive = true
+                    subtractionActive = false
                 }, label: {
                     Text("Addition").font(.title3)
                 }).padding(.vertical, 2.0)
+                Button(action: {
+                    operand = entry
+                    entry = 0 // NOTE: update feature later.
+                    subtractionActive = true
+                    additionActive = false
+                }, label: {
+                    Text("Subtraction").font(.title3)
+                }).padding(.vertical, 2.0)
+                
                 // Calculate button.
                 Button(action: {
+                    // Transfers values to hidden stored numbers.
                     if store {
-                        secondOperand = entry
-                        entry = secondOperand + operand
-                        store = false
+                        if additionActive {
+                            secondOperand = entry
+                            entry = secondOperand + operand
+                            store = false
+                        }
+                        if subtractionActive {
+                            secondOperand = entry
+                            entry = operand - secondOperand
+                            store = false
+                        }
+                    // Allows for repeated calculation of current amount.
                     } else {
-                        entry = entry + secondOperand
+                        if additionActive {
+                            entry = entry + secondOperand
+                        }
+                        if subtractionActive {
+                            entry = entry - secondOperand
+                        }
                     }
                 }, label: {
                     Text("Calculate").font(.title3)
                 }).padding(.vertical, 2.0)
+                
                 // Reset button.
                 Button(action: {
                     (entry, operand, secondOperand) = (0,0,0)
                     store = true
+                    (additionActive, subtractionActive) = (false, false)
                 }, label: {
                     Text("Reset").font(.title3)
                 }).padding(.vertical, 2.0)
