@@ -15,6 +15,7 @@ struct ContentView: View {
     @State var additionActive: Bool = false
     @State var subtractionActive: Bool = false
     @State var multiplyActive: Bool = false
+    @State var divideActive: Bool = false
     
     var body: some View {
         
@@ -66,6 +67,7 @@ struct ContentView: View {
                     additionActive = true
                     subtractionActive = false
                     multiplyActive = false
+                    divideActive = false
                     store = true
                 }, label: {
                     Text("Add").font(.title3)
@@ -76,6 +78,7 @@ struct ContentView: View {
                     subtractionActive = true
                     additionActive = false
                     multiplyActive = false
+                    divideActive = false
                     store = true
                 }, label: {
                     Text("Subtract").font(.title3)
@@ -86,9 +89,21 @@ struct ContentView: View {
                     multiplyActive = true
                     subtractionActive = false
                     additionActive = false
+                    divideActive = false
                     store = true
                 }, label: {
                     Text("Multiply").font(.title3)
+                }).padding(.vertical, 2.0)
+                Button(action: {
+                    operand = entry
+                    entry = 0 // NOTE: update feature later.
+                    divideActive = true
+                    multiplyActive = false
+                    subtractionActive = false
+                    additionActive = false
+                    store = true
+                }, label: {
+                    Text("Divide").font(.title3)
                 }).padding(.vertical, 2.0)
                 
                 // Calculate button.
@@ -108,6 +123,11 @@ struct ContentView: View {
                         if multiplyActive {
                             secondOperand = entry
                             entry = operand * secondOperand
+                            store = false
+                        }
+                        if divideActive {
+                            secondOperand = entry
+                            entry = operand / secondOperand
                             store = false
                         }
                     // Allows for repeated calculation of current amount.
