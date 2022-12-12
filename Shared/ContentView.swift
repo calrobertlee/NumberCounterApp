@@ -104,7 +104,7 @@ struct ContentView: View {
                     store = true
                 }, label: {
                     Text("Divide").font(.title3)
-                }).padding(.vertical, 2.0)
+                }).padding(.vertical, 2.0).padding(.bottom)
                 
                 // Calculate button.
                 Button(action: {
