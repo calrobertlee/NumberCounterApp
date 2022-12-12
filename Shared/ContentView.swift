@@ -20,9 +20,9 @@ struct ContentView: View {
         
         VStack {
 //            Text("\(secondOperand)")
-//                .font(.largeTitle).foregroundColor(.black)
-//            Text("\(operand)")
 //                .font(.largeTitle).foregroundColor(.red)
+//            Text("\(operand)")
+//                .font(.largeTitle).foregroundColor(.orange)
             Text("\(entry)")
                 .font(.system(size: 60))
                 .foregroundColor(.black)
@@ -60,6 +60,7 @@ struct ContentView: View {
                     entry = 0 // NOTE: update feature later.
                     additionActive = true
                     subtractionActive = false
+                    store = true
                 }, label: {
                     Text("Addition").font(.title3)
                 }).padding(.vertical, 2.0)
@@ -68,6 +69,7 @@ struct ContentView: View {
                     entry = 0 // NOTE: update feature later.
                     subtractionActive = true
                     additionActive = false
+                    store = true
                 }, label: {
                     Text("Subtraction").font(.title3)
                 }).padding(.vertical, 2.0)
