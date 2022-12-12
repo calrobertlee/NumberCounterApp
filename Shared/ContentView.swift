@@ -19,10 +19,14 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-//            Text("\(secondOperand)")
-//                .font(.largeTitle).foregroundColor(.red)
-//            Text("\(operand)")
-//                .font(.largeTitle).foregroundColor(.orange)
+            /* Debugging display numbers.
+             
+            Text("\(secondOperand)")
+                .font(.largeTitle).foregroundColor(.red)
+            Text("\(operand)")
+                .font(.largeTitle).foregroundColor(.orange)
+             
+             */
             Text("\(entry)")
                 .font(.system(size: 60))
                 .foregroundColor(.black)
@@ -54,6 +58,7 @@ struct ContentView: View {
             
             // Operation buttons.
             VStack {
+                
                 // Addition button. NOTE: Add bold later.
                 Button(action: {
                     operand = entry
@@ -109,16 +114,12 @@ struct ContentView: View {
                 }, label: {
                     Text("Reset").font(.title3)
                 }).padding(.vertical, 2.0)
+                
             }.padding()
         }
     }
 }
 
-
-
-// Entry number
-// Operand number
-// Solution
 
 
 
